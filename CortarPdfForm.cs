@@ -100,30 +100,37 @@ namespace Editter
 
         private void RemovePagesFromPdf(string inputFilePath, string outputFilePath, List<int> pagesToRemove)
         {
-            using (PdfReader pdfReader = new PdfReader(inputFilePath))
+            try
             {
-                using (PdfWriter pdfWriter = new PdfWriter(outputFilePath))
+                using (PdfReader pdfReader = new PdfReader(inputFilePath))
                 {
-                    using (PdfDocument pdfDocument = new PdfDocument(pdfReader, pdfWriter))
+                    using (PdfWriter pdfWriter = new PdfWriter(outputFilePath))
                     {
-                        pdfDocument.InitializeOutlines();
-
-                        int totalNumberOfPages = pdfDocument.GetNumberOfPages();
-                        pagesToRemove.Sort((a, b) => b.CompareTo(a)); // Ordenar de mayor a menor
-
-                        foreach (var pageNumber in pagesToRemove)
+                        using (PdfDocument pdfDocument = new PdfDocument(pdfReader, pdfWriter))
                         {
-                            if (pageNumber > 0 && pageNumber <= totalNumberOfPages)
+                            pdfDocument.InitializeOutlines();
+
+                            int totalNumberOfPages = pdfDocument.GetNumberOfPages();
+                            pagesToRemove.Sort((a, b) => b.CompareTo(a)); // Ordenar de mayor a menor
+
+                            foreach (var pageNumber in pagesToRemove)
                             {
-                                pdfDocument.RemovePage(pageNumber);
-                            }
-                            else
-                            {
-                                MessageBox.Show($"La página {pageNumber} no existe en el documento y no se puede eliminar.");
+                                if (pageNumber > 0 && pageNumber <= totalNumberOfPages)
+                                {
+                                    pdfDocument.RemovePage(pageNumber);
+                                }
+                                else
+                                {
+                                    MessageBox.Show($"La página {pageNumber} no existe en el documento y no se puede eliminar.");
+                                }
                             }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al procesar el archivo PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
