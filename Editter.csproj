@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="DocumentFormat.OpenXml.Framework, Version=3.0.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>packages\DocumentFormat.OpenXml.Framework.3.0.2\lib\net46\DocumentFormat.OpenXml.Framework.dll</HintPath>
     </Reference>
@@ -187,6 +190,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CortarPdfForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CortarPdfForm.Designer.cs">
+      <DependentUpon>CortarPdfForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditPdfForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +213,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CortarPdfForm.resx">
+      <DependentUpon>CortarPdfForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditPdfForm.resx">
       <DependentUpon>EditPdfForm.cs</DependentUpon>
     </EmbeddedResource>

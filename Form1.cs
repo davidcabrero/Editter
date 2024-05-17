@@ -82,7 +82,13 @@ namespace Editter
 
         private void cortarPdf_Click(object sender, EventArgs e)
         {
-
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                CortarPdfForm ventana = new CortarPdfForm(openFileDialog.FileName);
+                ventana.ShowDialog();
+            }
         }
     }
 }
