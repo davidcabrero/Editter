@@ -32,6 +32,7 @@
             this.botonWP = new Sunny.UI.UIButton();
             this.VerPdf = new Sunny.UI.UIButton();
             this.cortarPdf = new Sunny.UI.UIButton();
+            this.unirPdf = new Sunny.UI.UIButton();
             this.SuspendLayout();
             // 
             // botonPW
@@ -130,11 +131,36 @@
             this.cortarPdf.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.cortarPdf.Click += new System.EventHandler(this.cortarPdf_Click);
             // 
+            // unirPdf
+            // 
+            this.unirPdf.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.unirPdf.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.unirPdf.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.unirPdf.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.unirPdf.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.unirPdf.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.unirPdf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.unirPdf.LightColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
+            this.unirPdf.Location = new System.Drawing.Point(178, 287);
+            this.unirPdf.MinimumSize = new System.Drawing.Size(1, 1);
+            this.unirPdf.Name = "unirPdf";
+            this.unirPdf.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.unirPdf.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.unirPdf.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.unirPdf.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.unirPdf.Size = new System.Drawing.Size(180, 64);
+            this.unirPdf.Style = Sunny.UI.UIStyle.Custom;
+            this.unirPdf.TabIndex = 4;
+            this.unirPdf.Text = "Unir PDF";
+            this.unirPdf.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.unirPdf.Click += new System.EventHandler(this.unirPdf_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.unirPdf);
             this.Controls.Add(this.cortarPdf);
             this.Controls.Add(this.VerPdf);
             this.Controls.Add(this.botonWP);
@@ -151,6 +177,7 @@
         private Sunny.UI.UIButton botonWP;
         private Sunny.UI.UIButton VerPdf;
         private Sunny.UI.UIButton cortarPdf;
+        private Sunny.UI.UIButton unirPdf;
     }
 }
 

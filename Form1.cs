@@ -12,6 +12,8 @@ using DocumentFormat.OpenXml.Packaging;
 using System.IO;
 using Spire.Doc;
 using FileFormat = Spire.Pdf.FileFormat;
+using PdfSharp.Pdf.IO;
+using PdfSharp.Pdf;
 
 namespace Editter
 {
@@ -25,7 +27,7 @@ namespace Editter
 
         private void ConvertPdfToWord(string pdfFile, string wordFile)
         {
-            PdfDocument pdf = new PdfDocument();
+            Spire.Pdf.PdfDocument pdf = new Spire.Pdf.PdfDocument();
             pdf.LoadFromFile(pdfFile);
             pdf.SaveToFile(wordFile, FileFormat.DOCX);
         }
@@ -88,6 +90,58 @@ namespace Editter
             {
                 CortarPdfForm ventana = new CortarPdfForm(openFileDialog.FileName);
                 ventana.ShowDialog();
+            }
+        }
+
+        private void unirPdf_Click(object sender, EventArgs e)
+        {
+            // Crear un diálogo para seleccionar archivos
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Multiselect = true,
+                Filter = "Archivos PDF (*.pdf)|*.pdf",
+                Title = "Selecciona los archivos PDF"
+            };
+
+            // Mostrar el diálogo y obtener los archivos seleccionados
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string[] archivosSeleccionados = openFileDialog.FileNames;
+                if (archivosSeleccionados.Length > 0)
+                {
+                    try
+                    {
+                        // Obtener la carpeta de origen del primer archivo seleccionado
+                        string carpetaOrigen = Path.GetDirectoryName(archivosSeleccionados[0]);
+
+                        // Crear el documento PDF final
+                        PdfSharp.Pdf.PdfDocument pdfUnido = new PdfSharp.Pdf.PdfDocument();
+
+                        // Agregar cada página de los archivos seleccionados al documento final
+                        foreach (string archivo in archivosSeleccionados)
+                        {
+                            PdfSharp.Pdf.PdfDocument inputPdf = PdfReader.Open(archivo, PdfDocumentOpenMode.Import);
+                            foreach (PdfPage page in inputPdf.Pages)
+                            {
+                                pdfUnido.AddPage(page);
+                            }
+                        }
+
+                        // Guardar el documento final en la misma carpeta de origen
+                        string nombreSalida = Path.Combine(carpetaOrigen, "pdfUnido.pdf");
+                        pdfUnido.Save(nombreSalida);
+
+                        MessageBox.Show($"PDF unidos con éxito");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al unir los archivos PDF: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se seleccionaron archivos PDF.");
+                }
             }
         }
     }
