@@ -33,6 +33,7 @@
             this.VerPdf = new Sunny.UI.UIButton();
             this.cortarPdf = new Sunny.UI.UIButton();
             this.unirPdf = new Sunny.UI.UIButton();
+            this.protegerPdf = new Sunny.UI.UIButton();
             this.SuspendLayout();
             // 
             // botonPW
@@ -155,11 +156,36 @@
             this.unirPdf.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.unirPdf.Click += new System.EventHandler(this.unirPdf_Click);
             // 
+            // protegerPdf
+            // 
+            this.protegerPdf.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.protegerPdf.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.protegerPdf.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.protegerPdf.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.protegerPdf.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.protegerPdf.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.protegerPdf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.protegerPdf.LightColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
+            this.protegerPdf.Location = new System.Drawing.Point(407, 287);
+            this.protegerPdf.MinimumSize = new System.Drawing.Size(1, 1);
+            this.protegerPdf.Name = "protegerPdf";
+            this.protegerPdf.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.protegerPdf.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.protegerPdf.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.protegerPdf.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.protegerPdf.Size = new System.Drawing.Size(180, 64);
+            this.protegerPdf.Style = Sunny.UI.UIStyle.Custom;
+            this.protegerPdf.TabIndex = 5;
+            this.protegerPdf.Text = "Proteger PDF";
+            this.protegerPdf.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.protegerPdf.Click += new System.EventHandler(this.protegerPdf_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.protegerPdf);
             this.Controls.Add(this.unirPdf);
             this.Controls.Add(this.cortarPdf);
             this.Controls.Add(this.VerPdf);
@@ -178,6 +204,7 @@
         private Sunny.UI.UIButton VerPdf;
         private Sunny.UI.UIButton cortarPdf;
         private Sunny.UI.UIButton unirPdf;
+        private Sunny.UI.UIButton protegerPdf;
     }
 }
 

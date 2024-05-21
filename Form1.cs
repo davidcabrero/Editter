@@ -14,6 +14,7 @@ using Spire.Doc;
 using FileFormat = Spire.Pdf.FileFormat;
 using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf;
+using PdfSharp.Pdf.Security;
 
 namespace Editter
 {
@@ -143,6 +144,81 @@ namespace Editter
                     MessageBox.Show("No se seleccionaron archivos PDF.");
                 }
             }
+        }
+
+        private void protegerPdf_Click(object sender, EventArgs e)
+        {
+            // Crear un diálogo para seleccionar un archivo PDF
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Archivos PDF (*.pdf)|*.pdf",
+                Title = "Selecciona un archivo PDF para proteger"
+            };
+
+            // Mostrar el diálogo y obtener la ruta del archivo PDF seleccionado
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string pdfPath = openFileDialog.FileName;
+
+                // Solicitar al usuario que ingrese la contraseña
+                string contraseña = Prompt.ShowDialog("Contraseña:", "Contraseña");
+
+                // Verificar si se proporcionó una contraseña
+                if (!string.IsNullOrEmpty(contraseña))
+                {
+                    try
+                    {
+                        // Cargar el documento PDF
+                        PdfSharp.Pdf.PdfDocument pdfDocument = PdfReader.Open(pdfPath, PdfDocumentOpenMode.Modify);
+
+                        // Proteger el documento PDF con la contraseña proporcionada
+                        pdfDocument.SecuritySettings.UserPassword = contraseña;
+
+                        // Guardar el documento PDF protegido
+                        pdfDocument.Save(pdfPath);
+
+                        MessageBox.Show($"Archivo pdf protegido correctamente.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al proteger el archivo PDF: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se proporcionó una contraseña.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("No se seleccionó ningún archivo PDF.");
+            }
+        }
+    }
+
+    // Clase para mostrar un cuadro de diálogo de entrada de texto personalizado
+    public static class Prompt
+    {
+        public static string ShowDialog(string texto, string título)
+        {
+            Form prompt = new Form()
+            {
+                Width = 300,
+                Height = 150,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = título,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            Label textLabel = new Label() { Left = 50, Top = 20, Text = texto };
+            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 200 };
+            Button confirmation = new Button() { Text = "Ok", Left = 150, Width = 100, Top = 70, DialogResult = DialogResult.OK };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(textBox);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = confirmation;
+
+            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
         }
     }
 }
