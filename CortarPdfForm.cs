@@ -1,16 +1,9 @@
-﻿using iText.Kernel.Pdf;
+﻿
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using iText.Kernel.Pdf;
 using System.IO;
-using iText.Kernel.Utils;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 
 namespace Editter
 {
@@ -21,122 +14,77 @@ namespace Editter
 
         public CortarPdfForm(string filePath)
         {
-            InitializeComponent();
             txtInputFile = filePath;
+            InitializeComponent();
         }
 
         private void ProcessPdf()
         {
-            string inputFilePath = txtInputFile;
-
-            if (string.IsNullOrEmpty(inputFilePath))
-            {
-                MessageBox.Show("Por favor, seleccione un archivo PDF de entrada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            string pagesToRemoveInput = paginasEliminar.Text;
-
-            if (string.IsNullOrEmpty(pagesToRemoveInput))
-            {
-                MessageBox.Show("No se ingresaron páginas para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var pagesToRemove = ParsePagesToRemove(pagesToRemoveInput);
-
-            if (pagesToRemove.Count > 0)
-            {
-                string outputFilePath = GetOutputFilePath(inputFilePath);
-                try
-                {
-                    RemovePagesFromPdf(inputFilePath, outputFilePath, pagesToRemove);
-                    MessageBox.Show("El nuevo PDF se ha guardado correctamente sin las páginas especificadas.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ocurrió un error al procesar el archivo PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Por favor, ingrese números de página válidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public static string ShowInputDialog(string prompt)
-        {
-            InputDialog inputDialog = new InputDialog(prompt);
-            return inputDialog.ShowDialog() == DialogResult.OK ? inputDialog.UserInput : string.Empty;
-        }
-
-        private List<int> ParsePagesToRemove(string pagesToRemoveInput)
-        {
-            var pagesToRemove = new List<int>();
-            var pages = pagesToRemoveInput.Split(',');
-
-            foreach (var page in pages)
-            {
-                if (int.TryParse(page.Trim(), out int pageNumber))
-                {
-                    pagesToRemove.Add(pageNumber);
-                }
-                else
-                {
-                    MessageBox.Show($"'{page}' no es un número de página válido y será ignorado.");
-                }
-            }
-
-            return pagesToRemove;
-        }
-
-        private string GetOutputFilePath(string inputFilePath)
-        {
-            string directory = Path.GetDirectoryName(inputFilePath);
-            string filenameWithoutExtension = Path.GetFileNameWithoutExtension(inputFilePath);
-            string extension = Path.GetExtension(inputFilePath);
-            return Path.Combine(directory, $"{filenameWithoutExtension}_cortado{extension}");
-        }
-
-        private void RemovePagesFromPdf(string inputFilePath, string outputFilePath, List<int> pagesToRemove)
-        {
             try
             {
-                using (PdfReader pdfReader = new PdfReader(inputFilePath))
+                string inputPath = txtInputFile;
+
+                if (!File.Exists(inputPath))
                 {
-                    using (PdfWriter pdfWriter = new PdfWriter(outputFilePath))
-                    {
-                        using (PdfDocument pdfDocument = new PdfDocument(pdfReader, pdfWriter))
-                        {
-                            pdfDocument.InitializeOutlines();
+                    MessageBox.Show("El archivo no existe.");
+                    return;
+                }
 
-                            int totalNumberOfPages = pdfDocument.GetNumberOfPages();
-                            pagesToRemove.Sort((a, b) => b.CompareTo(a)); // Ordenar de mayor a menor
+                string pagesInput = paginasEliminar.Text;
 
-                            foreach (var pageNumber in pagesToRemove)
-                            {
-                                if (pageNumber > 0 && pageNumber <= totalNumberOfPages)
-                                {
-                                    pdfDocument.RemovePage(pageNumber);
-                                }
-                                else
-                                {
-                                    MessageBox.Show($"La página {pageNumber} no existe en el documento y no se puede eliminar.");
-                                }
-                            }
-                        }
-                    }
+                if (string.IsNullOrEmpty(pagesInput))
+                {
+                    MessageBox.Show("No se ingresaron páginas.");
+                    return;
+                }
+
+                string[] pagesToDeleteStr = pagesInput.Split(',');
+                int[] pagesToDelete = Array.ConvertAll(pagesToDeleteStr, int.Parse);
+
+                string outputPath = Path.Combine(Path.GetDirectoryName(inputPath),
+                                                 Path.GetFileNameWithoutExtension(inputPath) + "_cortado.pdf");
+
+                DeletePdfPages(inputPath, outputPath, pagesToDelete);
+
+                const string message = "¡PDF guardado con éxito!";
+                const string caption = "Finalizado";
+                var result = MessageBox.Show(message, caption,
+                                             MessageBoxButtons.OK,
+                                             MessageBoxIcon.Information);
+
+                if (result == DialogResult.OK)
+                {
+                    this.Close();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al procesar el archivo PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error: {ex.Message}");
+
             }
         }
+
+        static void DeletePdfPages(string inputPath, string outputPath, int[] pagesToDelete)
+        {
+            using (PdfDocument inputDocument = PdfReader.Open(inputPath, PdfDocumentOpenMode.Import))
+            using (PdfDocument outputDocument = new PdfDocument())
+            {
+                for (int i = 0; i < inputDocument.PageCount; i++)
+                {
+                    if (!Array.Exists(pagesToDelete, page => page == i + 1))
+                    {
+                        outputDocument.AddPage(inputDocument.Pages[i]);
+                    }
+                }
+                outputDocument.Save(outputPath);
+            }
+        }
+
 
         private void botonEliminar_Click(object sender, EventArgs e)
         {
             ProcessPdf();
         }
+
     }
 }

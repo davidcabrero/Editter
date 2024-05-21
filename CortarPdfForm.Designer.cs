@@ -54,9 +54,9 @@
             this.uiLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLabel1.Location = new System.Drawing.Point(55, 31);
             this.uiLabel1.Name = "uiLabel1";
-            this.uiLabel1.Size = new System.Drawing.Size(395, 49);
+            this.uiLabel1.Size = new System.Drawing.Size(571, 49);
             this.uiLabel1.TabIndex = 1;
-            this.uiLabel1.Text = "Páginas a eliminar: (Separadas por comas)";
+            this.uiLabel1.Text = "Páginas a eliminar: (Separadas por comas y sin espacios)";
             this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // botonEliminar
@@ -76,7 +76,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(791, 202);
+            this.ClientSize = new System.Drawing.Size(816, 202);
             this.Controls.Add(this.botonEliminar);
             this.Controls.Add(this.uiLabel1);
             this.Controls.Add(this.paginasEliminar);
