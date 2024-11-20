@@ -28,12 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.botonPW = new Sunny.UI.UIButton();
             this.botonWP = new Sunny.UI.UIButton();
             this.VerPdf = new Sunny.UI.UIButton();
             this.cortarPdf = new Sunny.UI.UIButton();
             this.unirPdf = new Sunny.UI.UIButton();
             this.protegerPdf = new Sunny.UI.UIButton();
+            this.IApdf = new Sunny.UI.UIButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // botonPW
@@ -46,7 +50,7 @@
             this.botonPW.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.botonPW.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.botonPW.LightColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.botonPW.Location = new System.Drawing.Point(178, 97);
+            this.botonPW.Location = new System.Drawing.Point(182, 54);
             this.botonPW.MinimumSize = new System.Drawing.Size(1, 1);
             this.botonPW.Name = "botonPW";
             this.botonPW.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
@@ -70,7 +74,7 @@
             this.botonWP.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.botonWP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.botonWP.LightColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.botonWP.Location = new System.Drawing.Point(407, 97);
+            this.botonWP.Location = new System.Drawing.Point(411, 54);
             this.botonWP.MinimumSize = new System.Drawing.Size(1, 1);
             this.botonWP.Name = "botonWP";
             this.botonWP.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
@@ -94,7 +98,7 @@
             this.VerPdf.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.VerPdf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.VerPdf.LightColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.VerPdf.Location = new System.Drawing.Point(178, 193);
+            this.VerPdf.Location = new System.Drawing.Point(182, 150);
             this.VerPdf.MinimumSize = new System.Drawing.Size(1, 1);
             this.VerPdf.Name = "VerPdf";
             this.VerPdf.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
@@ -118,7 +122,7 @@
             this.cortarPdf.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.cortarPdf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.cortarPdf.LightColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.cortarPdf.Location = new System.Drawing.Point(407, 193);
+            this.cortarPdf.Location = new System.Drawing.Point(411, 150);
             this.cortarPdf.MinimumSize = new System.Drawing.Size(1, 1);
             this.cortarPdf.Name = "cortarPdf";
             this.cortarPdf.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
@@ -142,7 +146,7 @@
             this.unirPdf.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.unirPdf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.unirPdf.LightColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.unirPdf.Location = new System.Drawing.Point(178, 287);
+            this.unirPdf.Location = new System.Drawing.Point(182, 244);
             this.unirPdf.MinimumSize = new System.Drawing.Size(1, 1);
             this.unirPdf.Name = "unirPdf";
             this.unirPdf.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
@@ -166,7 +170,7 @@
             this.protegerPdf.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.protegerPdf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.protegerPdf.LightColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.protegerPdf.Location = new System.Drawing.Point(407, 287);
+            this.protegerPdf.Location = new System.Drawing.Point(411, 244);
             this.protegerPdf.MinimumSize = new System.Drawing.Size(1, 1);
             this.protegerPdf.Name = "protegerPdf";
             this.protegerPdf.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
@@ -180,6 +184,39 @@
             this.protegerPdf.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.protegerPdf.Click += new System.EventHandler(this.protegerPdf_Click);
             // 
+            // IApdf
+            // 
+            this.IApdf.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.IApdf.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.IApdf.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.IApdf.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.IApdf.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.IApdf.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.IApdf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.IApdf.LightColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
+            this.IApdf.Location = new System.Drawing.Point(297, 340);
+            this.IApdf.MinimumSize = new System.Drawing.Size(1, 1);
+            this.IApdf.Name = "IApdf";
+            this.IApdf.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.IApdf.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.IApdf.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.IApdf.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.IApdf.Size = new System.Drawing.Size(180, 64);
+            this.IApdf.Style = Sunny.UI.UIStyle.Custom;
+            this.IApdf.TabIndex = 6;
+            this.IApdf.Text = "IA PDF";
+            this.IApdf.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.IApdf.Click += new System.EventHandler(this.iaPDF_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.IApdf);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(800, 450);
+            this.panel1.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -191,8 +228,11 @@
             this.Controls.Add(this.VerPdf);
             this.Controls.Add(this.botonWP);
             this.Controls.Add(this.botonPW);
+            this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -205,6 +245,8 @@
         private Sunny.UI.UIButton cortarPdf;
         private Sunny.UI.UIButton unirPdf;
         private Sunny.UI.UIButton protegerPdf;
+        private Sunny.UI.UIButton IApdf;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
